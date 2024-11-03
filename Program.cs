@@ -1,4 +1,4 @@
-﻿namespace _03._11._2024_Meetingplanner;
+﻿namespace Meetingplanner;
 
 class Program
 {
