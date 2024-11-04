@@ -5,5 +5,5 @@ namespace Meetingplanner.Service;
 
 public class WriteToJson
 {
-    public string = JsonConvert
+    // public string = JsonConvert.
 }
