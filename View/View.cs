@@ -19,20 +19,24 @@ public class MeetingView
         string title = Console.ReadLine()?.Trim() ?? "Unknown meeting name";
 
         Console.WriteLine("Enter start time for meeting  hh-mm");
-        string startTime = Console.ReadLine()?.Trim() ?? "00.00";
+        TimeOnly startTime = TimeOnly.Parse(Console.ReadLine()?.Trim() ?? "00:00".Replace(",", ":").Replace(".", ":"));
 
         Console.WriteLine("Enter end of meeting in format HH-hh");
-        string endTime = Console.ReadLine()?.Trim() ?? "01.00";
+        TimeOnly endTime = TimeOnly.Parse(Console.ReadLine()?.Trim() ?? "01:00".Replace(",", ":").Replace(".", ":"));
 
         Console.WriteLine("Who is participating in the meeting?(seperate with','");
-        List<string> participants = Console.ReadLine().Split(',').Select(p => p.Trim()).ToList();
+        List<string> participants = Console.ReadLine()?.Split(',').Select(p => p.Trim()).ToList() ?? new List<string>();
 
         var meeting = new Meeting
         {
             Title = title,
             StartTime = startTime,
+            EndTime = endTime,
+            Participants = participants
 
         };
+
+        _controller.AddMeeting(meeting);
     }
 
     public void DisplayMeetings()
@@ -47,7 +51,36 @@ public class MeetingView
 
         foreach (var meeting in meetings)
         {
-            DisplayMeeting(meeting);
+            DisplayMeetingDetails(meeting);
+        }
+    }
+
+    private void DisplayMeetingDetails(Meeting meeting)
+    {
+        Console.WriteLine($"Meeting: {meeting.Title}");
+        Console.WriteLine($"Start Time: {meeting.StartTime}");
+        Console.WriteLine($"End Time: {meeting.EndTime}");
+        Console.WriteLine($"Participants: {string.Join(",", meeting.Participants)}");
+        Console.WriteLine($"");
+    }
+
+    public void SearchMeetingsParticipant()
+    {
+        Console.WriteLine("Enter meeting participant");
+        string? participant = Console.ReadLine();
+
+        var meetings = _controller.GetListByParticipant(participant);
+
+        if (meetings.Count == 0)
+        {
+            Console.WriteLine($"No meetings found for: {participant}");
+            return;
+        }
+
+        Console.WriteLine($"Meetings for {participant}: ");
+        foreach (var meeting in meetings)
+        {
+            DisplayMeetingDetails(meeting);
         }
     }
 }
