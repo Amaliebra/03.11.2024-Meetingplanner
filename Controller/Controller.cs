@@ -28,8 +28,12 @@ public class MeetingController
         return MeetingsWithParticipant;
     }
 
-    public List<Meeting> GetOverlappigMeetings(DateTime start, TimeOnly end)
+    public List<Meeting> GetOverlappigMeetings(TimeOnly start, TimeOnly end)
     {
-        
+        var OverlappigMeetings = _meetings
+        .Where(m => m.StartTime < end && m.EndTime > start)
+        .ToList();
+
+        return OverlappigMeetings;
     }
 }
