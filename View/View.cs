@@ -18,11 +18,14 @@ public class MeetingView
         Console.WriteLine("Enter meeting title:");
         string title = Console.ReadLine()?.Trim() ?? "Unknown meeting name";
 
-        Console.WriteLine("Enter start time for meeting  hh-mm");
-        TimeOnly startTime = TimeOnly.Parse(Console.ReadLine()?.Trim() ?? "00:00".Replace(",", ":").Replace(".", ":"));
+        Console.WriteLine("Enter start of meeting in format HH-mm");
+        TimeOnly startTime = TimeOnly.Parse(Console.ReadLine()
+        .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
 
-        Console.WriteLine("Enter end of meeting in format HH-hh");
-        TimeOnly endTime = TimeOnly.Parse(Console.ReadLine()?.Trim() ?? "01:00".Replace(",", ":").Replace(".", ":"));
+        //?.Trim() ??"00:00"
+        Console.WriteLine("Enter end of meeting in format HH-mm");
+        TimeOnly endTime = TimeOnly.Parse(Console.ReadLine()
+        .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
 
         Console.WriteLine("Who is participating in the meeting?(seperate with','");
         List<string> participants = Console.ReadLine()?.Split(',').Select(p => p.Trim()).ToList() ?? new List<string>();
