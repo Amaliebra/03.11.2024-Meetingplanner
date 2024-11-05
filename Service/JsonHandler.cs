@@ -6,5 +6,10 @@ namespace Meetingplanner.Service;
 
 public class WriteToJson
 {
-    string JsonString = JsonConvert.SerializeObject(meeting);
+
+    public void SaveMeetings(string filePath, List<Meeting> meetings)
+    {
+        var MeetingsJson = JsonConvert.SerializeObject(meetings);
+        File.WriteAllText(filePath, MeetingsJson);
+    }
 }

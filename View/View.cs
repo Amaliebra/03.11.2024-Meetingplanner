@@ -15,22 +15,40 @@ public class MeetingView
 
     public void AddMeeting()
     {
-        Console.WriteLine("Enter meeting title:");
-        string title = Console.ReadLine()?.Trim() ?? "Unknown meeting name";
+        string title = "unknown meeting name";
+        string day = "unspecified day";
+        TimeOnly startTime = TimeOnly.MinValue;
+        TimeOnly endTime = TimeOnly.MinValue;
+        List<string> participants = new List<string>();
 
-        Console.WriteLine("Enter day of the meeting: ");
-        string day = Console.ReadLine()?.Trim() ?? "unspecified day";
+        try
+        {
+            Console.WriteLine("Enter meeting title:");
+            title = Console.ReadLine()?.Trim() ?? "Unknown meeting name";
 
-        Console.WriteLine("Enter start of meeting in format HH-mm");
-        TimeOnly startTime = TimeOnly.Parse(Console.ReadLine()
-        .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
+            Console.WriteLine("Enter day of the meeting: ");
+            day = Console.ReadLine()?.Trim() ?? "unspecified day";
 
-        Console.WriteLine("Enter end of meeting in format HH-mm");
-        TimeOnly endTime = TimeOnly.Parse(Console.ReadLine()
-        .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
+            Console.WriteLine("Enter start of meeting in format HH-mm");
+            startTime = TimeOnly.Parse(Console.ReadLine()
+            .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
 
-        Console.WriteLine("Who is participating in the meeting?(seperate with','");
-        List<string> participants = Console.ReadLine()?.Split(',').Select(p => p.Trim()).ToList() ?? new List<string>();
+            Console.WriteLine("Enter end of meeting in format HH-mm");
+            endTime = TimeOnly.Parse(Console.ReadLine()
+            .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
+
+            Console.WriteLine("Who is participating in the meeting? (separate with ',')");
+            participants = Console.ReadLine()?.Split(',')
+            .Select(p => p.Trim()).ToList() ?? new List<string>();
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("invalid input format");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error occurred: " + ex.Message);
+        }
 
         var meeting = new Meeting
         {
