@@ -18,7 +18,7 @@ class Program
             Console.WriteLine("3.Search for participant");
             Console.WriteLine("4.Exit");
             Console.WriteLine("Choose an option: ");
-            string option = Console.ReadLine();
+            string option = Console.ReadLine()?.Trim() ?? "1";
 
             switch (option)
             {

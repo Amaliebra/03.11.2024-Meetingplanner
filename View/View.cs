@@ -18,6 +18,9 @@ public class MeetingView
         Console.WriteLine("Enter meeting title:");
         string title = Console.ReadLine()?.Trim() ?? "Unknown meeting name";
 
+        Console.WriteLine("Enter day of the meeting: ");
+        string day = Console.ReadLine()?.Trim() ?? "unspecified day";
+
         Console.WriteLine("Enter start of meeting in format HH-mm");
         TimeOnly startTime = TimeOnly.Parse(Console.ReadLine()
         .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
@@ -33,10 +36,10 @@ public class MeetingView
         var meeting = new Meeting
         {
             Title = title,
+            Day = day,
             StartTime = startTime,
             EndTime = endTime,
             Participants = participants
-
         };
 
         _controller.AddMeeting(meeting);
@@ -61,6 +64,7 @@ public class MeetingView
     private void DisplayMeetingDetails(Meeting meeting)
     {
         Console.WriteLine($"Meeting: {meeting.Title}");
+        Console.WriteLine($"Day: {meeting.Day}");
         Console.WriteLine($"Start Time: {meeting.StartTime}");
         Console.WriteLine($"End Time: {meeting.EndTime}");
         Console.WriteLine($"Participants: {string.Join(",", meeting.Participants)}");
