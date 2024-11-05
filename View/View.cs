@@ -25,7 +25,6 @@ public class MeetingView
         TimeOnly startTime = TimeOnly.Parse(Console.ReadLine()
         .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));
 
-        //?.Trim() ??"00:00"
         Console.WriteLine("Enter end of meeting in format HH-mm");
         TimeOnly endTime = TimeOnly.Parse(Console.ReadLine()
         .Replace(",", ":").Replace(".", ":").Replace(" ", ":"));

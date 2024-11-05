@@ -1,10 +1,10 @@
 using Newtonsoft.Json;
 using Meetingplanner.Controller;
+using Meetingplanner.Models;
 
 namespace Meetingplanner.Service;
 
 public class WriteToJson
 {
-    // public string = JsonConvert.
-    
+    string JsonString = JsonConvert.SerializeObject(meeting);
 }
