@@ -8,12 +8,6 @@ namespace Meetingplanner.Controller;
 public class MeetingController
 {
     private List<Meeting> _meetings = new List<Meeting>();
-    // private const string MeetingsJsonFile = "meetings.json";
-
-    // public MeetingController()
-    // {
-    //     LoadMeetingsFromJson(MeetingsJsonFile)
-    // }
 
     public void AddMeeting(Meeting meeting)
     {

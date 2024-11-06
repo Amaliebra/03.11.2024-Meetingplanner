@@ -40,6 +40,7 @@ class Program
                 default:
                     Console.Clear();
                     Console.WriteLine("Invalid. Try again");
+                    Console.ReadLine();
                     break;
             }
         }
